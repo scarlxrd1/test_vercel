@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA | Authentication</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Google reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lcp654tAAAAAIE9s-4N5ThVCBKZwkxsBOnHxm-7"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: { cream: '#FBFBFA' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #FBFBFA; overflow-x: hidden; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="font-sans text-stone-900 antialiased selection:bg-stone-200 selection:text-stone-900">
+    
+    <!-- ========================================== -->
+    <!-- DYNAMIC NAVBAR PLACEHOLDER -->
+    <!-- ========================================== -->
+    <div id="navbar-container"></div>
+    
+    <!-- Main Authentication Container -->
+    <main class="min-h-[75vh] flex items-center justify-center px-6 py-24">
+        <div class="w-full max-w-lg bg-white p-10 md:p-14 shadow-sm border border-stone-100 rounded-sm transition-all duration-300">
+            <div class="text-center mb-10">
+                <h1 data-i18n="auth.sign_in_title" id="auth-title" class="font-serif text-3xl md:text-4xl text-stone-900 mb-3">Sign In</h1>
+                <p data-i18n="auth.sign_in_subtitle" id="auth-subtitle" class="font-sans text-sm text-stone-500">Access your AURA account.</p>
+            </div>
+            
+            <!-- Error/Success Message Container -->
+            <div id="auth-error" class="hidden mb-6 p-4 bg-red-50 border border-red-100 text-red-600 text-sm font-sans rounded-sm text-center"></div>
+            
+            <form id="auth-form" class="flex flex-col gap-6">
+                
+                <!-- Registration Only Fields (Hidden by default) -->
+                <div id="register-fields" class="hidden flex-col gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label data-i18n="auth.labels.first_name" for="firstName" class="block font-sans text-xs tracking-widest uppercase text-stone-500 mb-2">First Name</label>
+                            <input type="text" id="firstName" class="w-full bg-transparent border-b border-stone-300 py-3 font-sans text-stone-900 placeholder-stone-400 focus:outline-none focus:border-stone-900 transition-colors">
+                        </div>
+                        <div>
+                            <label data-i18n="auth.labels.last_name" for="lastName" class="block font-sans text-xs tracking-widest uppercase text-stone-500 mb-2">Last Name</label>
+                            <input type="text" id="lastName" class="w-full bg-transparent border-b border-stone-300 py-3 font-sans text-stone-900 placeholder-stone-400 focus:outline-none focus:border-stone-900 transition-colors">
+                        </div>
+                    </div>
+                    <div>
+                        <label data-i18n="auth.labels.phone" for="phone" class="block font-sans text-xs tracking-widest uppercase text-stone-500 mb-2">Phone Number</label>
+                        <input type="tel" id="phone" class="w-full bg-transparent border-b border-stone-300 py-3 font-sans text-stone-900 placeholder-stone-400 focus:outline-none focus:border-stone-900 transition-colors">
+                    </div>
+                    <div>
+                        <label data-i18n="auth.labels.address" for="address" class="block font-sans text-xs tracking-widest uppercase text-stone-500 mb-2">Home Address</label>
+                        <input type="text" id="address" class="w-full bg-transparent border-b border-stone-300 py-3 font-sans text-stone-900 placeholder-stone-400 focus:outline-none focus:border-stone-900 transition-colors">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label data-i18n="auth.labels.city" for="city" class="block font-sans text-xs tracking-widest uppercase text-stone-500 mb-2">City</label>
+                            <input type="text" id="city" class="w-full bg-transparent border-b border-stone-300 py-3 font-sans text-stone-900 placeholder-stone-400 focus:outline-none focus:border-stone-900 transition-colors">
+                        </div>
+                        <div>
+                            <label data-i18n="auth.labels.country" for="country" class="block font-sans text-xs tracking-widest uppercase text-stone-500 mb-2">Country</label>
+                            <select id="country" class="w-full bg-transparent border-b border-stone-300 py-3 font-sans text-stone-900 focus:outline-none focus:border-stone-900 transition-colors appearance-none cursor-pointer" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23a8a29e%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 0.2rem top 50%; background-size: 0.65rem auto;">
+                                <option data-i18n="auth.countries.select" value="" disabled selected>Select Country</option>
+                                <option data-i18n="auth.countries.greece" value="Greece">Greece</option>
+                                <option data-i18n="auth.countries.cyprus" value="Cyprus">Cyprus</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label data-i18n="auth.labels.postal_code" for="postalCode" class="block font-sans text-xs tracking-widest uppercase text-stone-500 mb-2">Postal Code (ZIP)</label>
+                        <input type="text" id="postalCode" class="w-full bg-transparent border-b border-stone-300 py-3 font-sans text-stone-900 placeholder-stone-400 focus:outline-none focus:border-stone-900 transition-colors">
+                    </div>
+
+                    <!-- Google reCAPTCHA Disclaimer -->
+                    <div class="mt-2 text-xs text-stone-400 leading-relaxed text-center">
+                        This site is protected by reCAPTCHA and the Google 
+                        <a href="https://policies.google.com/privacy" class="underline hover:text-stone-600 transition-colors" target="_blank">Privacy Policy</a> and 
+                        <a href="https://policies.google.com/terms" class="underline hover:text-stone-600 transition-colors" target="_blank">Terms of Service</a> apply.
+                    </div>
+                </div>
+                
+                <!-- Standard Fields (Always Visible) -->
+                <div>
+                    <label data-i18n="auth.labels.email" for="email" class="block font-sans text-xs tracking-widest uppercase text-stone-500 mb-2">Email Address</label>
+                    <input type="email" id="email" required class="w-full bg-transparent border-b border-stone-300 py-3 font-sans text-stone-900 placeholder-stone-400 focus:outline-none focus:border-stone-900 transition-colors">
+                </div>
+                <div>
+                    <label data-i18n="auth.labels.password" for="password" class="block font-sans text-xs tracking-widest uppercase text-stone-500 mb-2">Password</label>
+                    <input type="password" id="password" required class="w-full bg-transparent border-b border-stone-300 py-3 font-sans text-stone-900 placeholder-stone-400 focus:outline-none focus:border-stone-900 transition-colors">
+                    <div id="forgot-password-container" class="flex justify-end mt-2">
+                        <button data-i18n="auth.forgot_password" type="button" id="forgot-password-btn" class="font-sans text-xs text-stone-500 hover:text-stone-900 transition-colors">Forgot your password?</button>
+                    </div>
+                </div>
+                
+                <button data-i18n="auth.sign_in_btn" type="submit" id="auth-submit-btn" class="w-full bg-stone-900 text-white font-sans text-sm tracking-widest uppercase py-4 mt-4 hover:bg-stone-800 transition-colors rounded-sm shadow-sm">
+                    Sign In
+                </button>
+            </form>
+            
+            <div class="mt-8 text-center">
+                <p class="font-sans text-sm text-stone-500">
+                    <span data-i18n="auth.no_account" id="toggle-text-prefix">Don't have an account?</span> 
+                    <button data-i18n="auth.create_one" type="button" id="toggle-mode-btn" class="text-stone-900 hover:text-stone-600 transition-colors underline underline-offset-4 font-medium ml-1">Create one</button>
+                </p>
+            </div>
+        </div>
+    </main>
+    
+    <!-- ========================================== -->
+    <!-- DYNAMIC FOOTER PLACEHOLDER -->
+    <!-- ========================================== -->
+    <div id="footer-container"></div>
+    
+    <!-- Global Scripts -->
+    <script type="module" src="./js/global.js"></script>
+    
+    <!-- Auth Logic Script -->
+    <script type="module" src="./js/auth.js"></script>
+</body>
+</html>

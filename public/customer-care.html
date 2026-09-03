@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA | Customer Care</title>
+    
+    <!-- Google reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lcp654tAAAAAIE9s-4N5ThVCBKZwkxsBOnHxm-7"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    colors: { cream: '#FAFAFA' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #FAFAFA; overflow-x: hidden; }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="font-sans text-stone-900 antialiased selection:bg-stone-200 selection:text-stone-900">
+    <div id="navbar-container"></div>
+    <main class="max-w-[1200px] mx-auto px-6 md:px-12 pt-24 pb-32">
+        <header class="text-center mb-24">
+            <h1 data-i18n="customer_care.title" class="font-serif text-5xl md:text-6xl text-stone-900 mb-6">Customer Care</h1>
+            <p data-i18n="customer_care.subtitle" class="font-sans text-stone-500 max-w-lg mx-auto leading-relaxed">
+                We are dedicated to providing a seamless experience. Whether you have a question about a piece, shipping, or need assistance with an existing order, we are here to help.
+            </p>
+        </header>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-24">
+            <section>
+                <div class="flex items-center gap-3 mb-10 relative">
+                    <h2 data-i18n="customer_care.form.title" class="font-serif text-3xl text-stone-900">Get in Touch</h2>
+                    <div class="group relative cursor-help flex items-center justify-center mt-1">
+                        <span class="text-stone-400 border border-stone-300 rounded-full w-5 h-5 flex items-center justify-center text-xs font-serif hover:bg-stone-100 transition-colors">?</span>
+                        <div data-i18n="customer_care.form.tooltip" class="absolute left-1/2 -translate-x-1/2 bottom-full mb-3 hidden group-hover:block w-64 p-4 bg-stone-900 text-white text-xs font-sans rounded-sm shadow-xl z-20 text-center leading-relaxed">
+                            If you are logged into your account, your registration details are securely and automatically attached to this request.
+                            <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-stone-900"></div>
+                        </div>
+                    </div>
+                </div>
+                <form id="support-form" class="flex flex-col gap-8">
+                    <div id="guest-fields" class="flex flex-col gap-8 transition-all duration-300">
+                        <div>
+                            <label data-i18n="customer_care.form.labels.name" for="name" class="block font-sans text-xs tracking-widest uppercase text-stone-500 mb-2">Full Name</label>
+                            <input type="text" id="name" class="w-full bg-transparent border-b border-stone-300 py-3 font-sans text-stone-900 placeholder-stone-400 focus:outline-none focus:border-stone-900 transition-colors">
+                        </div>
+                        <div>
+                            <label data-i18n="customer_care.form.labels.email" for="email" class="block font-sans text-xs tracking-widest uppercase text-stone-500 mb-2">Email Address</label>
+                            <input type="email" id="email" class="w-full bg-transparent border-b border-stone-300 py-3 font-sans text-stone-900 placeholder-stone-400 focus:outline-none focus:border-stone-900 transition-colors">
+                        </div>
+                        <div>
+                            <label data-i18n="customer_care.form.labels.phone" for="phone" class="block font-sans text-xs tracking-widest uppercase text-stone-500 mb-2">Telephone Number</label>
+                            <input type="tel" id="phone" class="w-full bg-transparent border-b border-stone-300 py-3 font-sans text-stone-900 placeholder-stone-400 focus:outline-none focus:border-stone-900 transition-colors">
+                        </div>
+                    </div>
+                    <div>
+                        <label data-i18n="customer_care.form.labels.issue_type" for="issue-type" class="block font-sans text-xs tracking-widest uppercase text-stone-500 mb-2">Issue Type</label>
+                        <select id="issue-type" required class="w-full bg-transparent border-b border-stone-300 py-3 font-sans text-stone-900 focus:outline-none focus:border-stone-900 transition-colors appearance-none cursor-pointer" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23a8a29e%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 0.2rem top 50%; background-size: 0.65rem auto;">
+                            <option data-i18n="customer_care.form.issues.select" value="" disabled selected>Select an option</option>
+                            <option data-i18n="customer_care.form.issues.general" value="General Inquiry">General Inquiry</option>
+                            <option data-i18n="customer_care.form.issues.order" value="Order/Product Issue">Order/Product Issue</option>
+                            <option data-i18n="customer_care.form.issues.technical" value="Technical Problem">Technical Problem</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label data-i18n="customer_care.form.labels.message" for="message" class="block font-sans text-xs tracking-widest uppercase text-stone-500 mb-2">How can we help you?</label>
+                        <textarea id="message" rows="4" required class="w-full bg-transparent border-b border-stone-300 py-3 font-sans text-stone-900 placeholder-stone-400 focus:outline-none focus:border-stone-900 transition-colors resize-none"></textarea>
+                    </div>
+                    <button data-i18n="customer_care.form.submit" type="submit" id="submit-support-btn" class="w-full bg-stone-900 text-white font-sans text-sm tracking-widest uppercase py-5 mt-4 hover:bg-stone-800 transition-colors rounded-sm shadow-sm">
+                        Submit Inquiry
+                    </button>
+                    <!-- Google reCAPTCHA Disclaimer -->
+                    <div class="mt-2 text-[10px] text-stone-400 leading-relaxed text-center font-sans">
+                        This site is protected by reCAPTCHA and the Google 
+                        <a href="https://policies.google.com/privacy" class="underline hover:text-stone-600 transition-colors" target="_blank">Privacy Policy</a> and 
+                        <a href="https://policies.google.com/terms" class="underline hover:text-stone-600 transition-colors" target="_blank">Terms of Service</a> apply.
+                    </div>
+                </form>
+            </section>
+            <section>
+                <h2 data-i18n="customer_care.faq.title" class="font-serif text-3xl text-stone-900 mb-10">Frequently Asked Questions</h2>
+                <div class="border-t border-stone-200">
+                    <details class="group border-b border-stone-200 py-6">
+                        <summary class="font-sans text-sm font-medium tracking-wide text-stone-900 cursor-pointer flex justify-between items-center">
+                            <span data-i18n="customer_care.faq.q1">What are your standard shipping times?</span>
+                            <span class="text-stone-400 transition-transform duration-300 group-open:rotate-45">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"></path></svg>
+                            </span>
+                        </summary>
+                        <p data-i18n="customer_care.faq.a1" class="font-sans text-sm text-stone-500 mt-6 leading-relaxed">
+                            Because many of our pieces are crafted to order, standard delivery generally takes between 4 to 6 weeks. In-stock decor items are usually dispatched within 3-5 business days. You will receive a tracking link once your order leaves our facility.
+                        </p>
+                    </details>
+                    <details class="group border-b border-stone-200 py-6">
+                        <summary class="font-sans text-sm font-medium tracking-wide text-stone-900 cursor-pointer flex justify-between items-center">
+                            <span data-i18n="customer_care.faq.q2">Do you offer white-glove delivery and assembly?</span>
+                            <span class="text-stone-400 transition-transform duration-300 group-open:rotate-45">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"></path></svg>
+                            </span>
+                        </summary>
+                        <p data-i18n="customer_care.faq.a2" class="font-sans text-sm text-stone-500 mt-6 leading-relaxed">
+                            Yes, white-glove delivery is available for all large furniture items (tables, seating) at an additional tier during checkout. Our team will deliver the piece to your room of choice, handle all assembly, and remove the packaging materials.
+                        </p>
+                    </details>
+                    <details class="group border-b border-stone-200 py-6">
+                        <summary class="font-sans text-sm font-medium tracking-wide text-stone-900 cursor-pointer flex justify-between items-center">
+                            <span data-i18n="customer_care.faq.q3">Are your materials sustainably sourced?</span>
+                            <span class="text-stone-400 transition-transform duration-300 group-open:rotate-45">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"></path></svg>
+                            </span>
+                        </summary>
+                        <p data-i18n="customer_care.faq.a3" class="font-sans text-sm text-stone-500 mt-6 leading-relaxed">
+                            Sustainability is at the core of AURA. We strictly utilize FSC-certified timbers, organic linens, and non-toxic finishes. We partner directly with artisans to ensure a transparent, ethical supply chain.
+                        </p>
+                    </details>
+                </div>
+            </section>
+        </div>
+        <section class="bg-stone-100 p-10 md:p-16 rounded-sm text-center">
+            <h2 data-i18n="customer_care.returns.title" class="font-serif text-2xl text-stone-900 mb-4">Returns & Exchanges</h2>
+            <div class="w-12 h-px bg-stone-300 mx-auto mb-6"></div>
+            <p data-i18n="customer_care.returns.desc" class="font-sans text-sm text-stone-500 max-w-2xl mx-auto leading-relaxed">
+                We take immense pride in the craftsmanship of our collection. If you are not entirely satisfied with your purchase, AURA accepts returns of unused, undamaged items within <strong>30 days of delivery</strong>. Custom or made-to-order pieces are final sale. To initiate a return, simply fill out the contact form above with your order number.
+            </p>
+        </section>
+    </main>
+    <div id="footer-container"></div>
+    <script type="module" src="./js/global.js"></script>
+    <script type="module" src="./js/customer-care.js"></script>
+</body>
+</html>
